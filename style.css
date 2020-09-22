@@ -12,9 +12,9 @@
 }
 
 [data-theme="dark"] {
-  --primary-color: rgb(150, 65, 255);
-  --primary-variant: #6c63ff;
-  --secondary-color: #03dac5;
+  --primary-color: #ff6b35;
+  --primary-variant: #f7c59f;
+  --secondary-color: #ff5376;
   --on-primary: #000;
   --on-background: rgba(255, 255, 255, 0.9);
   --on-background-alt: rgba(255, 255, 255, 0.7);
@@ -170,7 +170,6 @@ button:hover:not(.outline) {
   width: 40%;
   text-align: justify;
   background: rgb(0 0 0 / 50%);
-  color: var(--on-primary);
   border-radius: 10px;
   padding: 30px;
 }
