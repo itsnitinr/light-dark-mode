@@ -12,30 +12,39 @@ function imageMode(colorMode) {
   image3.src = `img/undraw_finance_${colorMode}.svg`;
 }
 
-function darkMode() {
-  nav.style.backgroundColor = "rgb(0 0 0 / 50%)";
-  textBox.style.backgroundColor = "rgb(255 255 255 / 50%)";
-  toggleIcon.children[0].textContent = "Dark Mode";
-  toggleIcon.children[1].classList.replace("fa-sun", "fa-moon");
-  imageMode("dark");
-}
-
-function lightMode() {
-  nav.style.backgroundColor = "rgb(255 255 255 / 50%)";
-  textBox.style.backgroundColor = "rgb(0 0 0 / 50%)";
-  toggleIcon.children[0].textContent = "Light Mode";
-  toggleIcon.children[1].classList.replace("fa-moon", "fa-sun");
-  imageMode("light");
+function toggleDarkModeStyles(isDark) {
+  nav.style.backgroundColor = isDark
+    ? "rgb(0 0 0 / 50%)"
+    : "rgb(246 246 246 / 50%)";
+  textBox.style.backgroundColor = isDark
+    ? "rgb(255 255 255 / 50%)"
+    : "rgb(0 0 0 / 50%)";
+  toggleIcon.children[0].textContent = isDark ? "Dark Mode" : "Light Mode";
+  isDark
+    ? toggleIcon.children[1].classList.replace("fa-sun", "fa-moon")
+    : toggleIcon.children[1].classList.replace("fa-moon", "fa-sun");
+  isDark ? imageMode("dark") : imageMode("light");
 }
 
 function switchTheme(event) {
   if (event.target.checked) {
     document.documentElement.setAttribute("data-theme", "dark");
-    darkMode();
+    localStorage.setItem("theme", "dark");
+    toggleDarkModeStyles(true);
   } else {
     document.documentElement.setAttribute("data-theme", "light");
-    lightMode();
+    localStorage.setItem("theme", "light");
+    toggleDarkModeStyles(false);
   }
 }
 
 toggleSwitch.addEventListener("change", switchTheme);
+
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme) {
+  document.documentElement.setAttribute("data-theme", currentTheme);
+  if (currentTheme === "dark") {
+    toggleSwitch.checked = true;
+    toggleDarkModeStyles(true);
+  }
+}
